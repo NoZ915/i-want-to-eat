@@ -42,4 +42,37 @@ export const schema = buildSchema(`
   type Query {
     restaurants(page: Int = 1, limit: Int = 10): RestaurantPaginatedResult
   }
+
+  type Mutation {
+    deleteRestaurant(id: ID!): Boolean,
+
+    # 更新使用者自行新增餐廳的主要欄位
+    updateUserAddedRestaurant(
+      id: ID!
+      name: String
+      address: String
+      isRecommended: Boolean
+      rating: Float
+      price_level: Int
+    ): Restaurant
+
+    # 只更新 Google 取得餐廳的 userReview，假設只有一筆共用的 userReview
+    updateGoogleRestaurantUserReview(
+      id: ID!
+      pros: String
+      cons: String
+      rating: Float
+      isRecommended: Boolean
+      images: [String]
+    ): Restaurant
+
+    addUserAddedRestaurant(
+      name: String!
+      address: String!
+      location: LocationInput!
+      rating: Float
+      price_level: Int
+      isRecommended: Boolean
+    ): Restaurant
+  }
 `);

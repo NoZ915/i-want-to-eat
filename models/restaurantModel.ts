@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 const userReviewSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, required: true },
+  // userId: { type: mongoose.Schema.Types.ObjectId, required: true },
+  userId: String, // 使用者 ID，假設目前共用可放空字串或預設值
   pros: String,
   cons: String,
   rating: Number,
