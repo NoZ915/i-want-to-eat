@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 
 const userReviewSchema = new mongoose.Schema({
-  // userId: { type: mongoose.Schema.Types.ObjectId, required: true },
-  userId: String, // 使用者 ID，假設目前共用可放空字串或預設值
   pros: String,
   cons: String,
   rating: Number,
@@ -25,7 +23,7 @@ const restaurantSchema = new mongoose.Schema({
   types: [String],
   price_level: Number,
 
-  userReviews: [userReviewSchema],
+  userReview: userReviewSchema,
 
   isUserAdded: Boolean,
   createdAt: { type: Date, default: Date.now },

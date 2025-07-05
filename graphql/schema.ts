@@ -7,13 +7,20 @@ export const schema = buildSchema(`
   }
 
   type UserReview {
-    userId: ID!
     pros: String
     cons: String
     rating: Float
     isRecommended: Boolean
     images: [String]
     updatedAt: String
+  }
+
+  input UserReviewInput {
+    pros: String
+    cons: String
+    rating: Float
+    isRecommended: Boolean
+    images: [String]
   }
 
   type Restaurant {
@@ -29,7 +36,7 @@ export const schema = buildSchema(`
     price_level: Int
     isUserAdded: Boolean
     createdAt: String
-    userReviews: [UserReview]
+    userReview: UserReview
   }
 
   type RestaurantPaginatedResult {
@@ -44,35 +51,28 @@ export const schema = buildSchema(`
   }
 
   type Mutation {
-    deleteRestaurant(id: ID!): Boolean,
-
-    # 更新使用者自行新增餐廳的主要欄位
+    deleteRestaurant(id: ID!): Boolean
     updateUserAddedRestaurant(
       id: ID!
       name: String
       address: String
-      isRecommended: Boolean
       rating: Float
       price_level: Int
+      userReview: UserReviewInput
     ): Restaurant
 
-    # 只更新 Google 取得餐廳的 userReview，假設只有一筆共用的 userReview
     updateGoogleRestaurantUserReview(
       id: ID!
-      pros: String
-      cons: String
-      rating: Float
-      isRecommended: Boolean
-      images: [String]
+      userReview: UserReviewInput
     ): Restaurant
 
-    addUserAddedRestaurant(
+    createUserAddedRestaurant(
       name: String!
       address: String!
-      location: LocationInput!
       rating: Float
       price_level: Int
       isRecommended: Boolean
+      userReview: UserReviewInput
     ): Restaurant
   }
 `);

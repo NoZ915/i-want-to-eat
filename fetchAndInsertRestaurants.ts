@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 
 const LAT = 22.651373604896655;
 const LNG = 120.30332454684512;
-const RADIUS = 200; // 公尺
+const RADIUS = 3000; // 公尺
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 // 計算地球兩點距離（Haversine）
@@ -75,11 +75,14 @@ const fetchAndInsertRestaurants = async () => {
               place_id: place.place_id,
               isUserAdded: false,
               createdAt: new Date(),
-              isRecommended: false,
-              pros: "",
-              cons: "",
-              userRating: 0,
-              images: [],
+              userReview: {
+                pros: "",
+                cons: "",
+                rating: 0,
+                isRecommended: false,
+                images: [],
+                updatedAt: new Date(),
+              },
             },
           },
           { upsert: true, new: true, setDefaultsOnInsert: true }
