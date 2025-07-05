@@ -2,8 +2,8 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import { graphqlHTTP } from "express-graphql";
-import { schema } from "../graphql/schema";
-import { root } from "../graphql/resolvers";
+import { schema } from "./graphql/schema";
+import { root } from "./graphql/resolvers";
 
 dotenv.config();
 
