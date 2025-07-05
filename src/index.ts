@@ -3,7 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { graphqlHTTP } from "express-graphql";
 import { schema } from "../graphql/schema";
-import { root } from "../graphql/resolvers";
+import { resolvers } from "../graphql/resolvers";
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ app.use(express.json());
 // 掛載 GraphQL
 app.use("/graphql", graphqlHTTP({
   schema,
-  rootValue: root,
+  rootValue: resolvers,
   graphiql: true, // 可用瀏覽器測試
 }));
 
