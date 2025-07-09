@@ -1,13 +1,48 @@
 import Restaurant from "../models/restaurantModel";
-import mongoose from "mongoose";
+import mongoose, { SortOrder } from "mongoose";
 
 export const resolvers = {
-  restaurants: async ({ page = 1, limit = 10 }: { page: number; limit: number }) => {
+  restaurants: async ({
+    page = 1,
+    limit = 10,
+    sortBy = "createdAt", // 預設排序欄位
+    order = "desc",       // 預設排序方式
+    search,
+  }: {
+    page: number;
+    limit: number;
+    sortBy?: string;
+    order?: "asc" | "desc";
+    search?: string;
+  }) => {
     const skip = (page - 1) * limit;
+
+    // 建立搜尋條件
+    const filter: any = {};
+    if (search) {
+      const regex = new RegExp(search, "i"); // 不區分大小寫
+      filter.$or = [{ name: regex }, { address: regex }];
+    }
+
+    // 確保 sort 欄位合法，避免使用者傳奇怪的欄位造成錯誤
+    const validSortFields = [
+      "rating",
+      "price_level",
+      "createdAt",
+      "user_ratings_total",
+      "name",
+      "distance"
+    ];
+    const sortField = validSortFields.includes(sortBy) ? sortBy : "createdAt";
+    const sortOrder = order === "asc" ? 1 : -1;
+
+    const sort: { [key: string]: SortOrder } = { [sortField]: sortOrder };
+
     const [data, total] = await Promise.all([
-      Restaurant.find().skip(skip).limit(limit),
-      Restaurant.countDocuments(),
+      Restaurant.find(filter).sort(sort).skip(skip).limit(limit),
+      Restaurant.countDocuments(filter),
     ]);
+
     return {
       data,
       total,

@@ -46,9 +46,15 @@ export const schema = buildSchema(`
     totalPages: Int
   }
 
-  type Query {
-    restaurants(page: Int = 1, limit: Int = 10): RestaurantPaginatedResult
-  }
+type Query {
+  restaurants(
+    page: Int = 1
+    limit: Int = 10
+    sortBy: String
+    order: String
+    search: String
+  ): RestaurantPaginatedResult
+}
 
   type Mutation {
     deleteRestaurant(id: ID!): Boolean
