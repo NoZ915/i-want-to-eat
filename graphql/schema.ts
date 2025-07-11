@@ -60,12 +60,12 @@ export const schema = buildSchema(`
     deleteRestaurant(id: ID!): Boolean
     
     updateRestaurant(
-      $id: ID!
-      $name: String
-      $address: String
-      $rating: Float
-      $price_level: Int
-      $userReview: UserReviewInput
+      id: ID!
+      name: String
+      address: String
+      rating: Float
+      price_level: Int
+      userReview: UserReviewInput
     ): Restaurant
 
     createUserAddedRestaurant(
