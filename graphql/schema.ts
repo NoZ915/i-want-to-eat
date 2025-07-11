@@ -73,7 +73,6 @@ export const schema = buildSchema(`
       address: String!
       rating: Float
       price_level: Int
-      isRecommended: Boolean
       userReview: UserReviewInput
     ): Restaurant
   }
