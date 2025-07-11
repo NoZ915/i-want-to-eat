@@ -129,7 +129,7 @@ export const resolvers = {
     }
   },
 
-  createUserAddedRestaurant: async ({
+  createRestaurant: async ({
     name,
     address,
     rating,
