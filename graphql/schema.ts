@@ -68,7 +68,7 @@ export const schema = buildSchema(`
       userReview: UserReviewInput
     ): Restaurant
 
-    createUserAddedRestaurant(
+    createRestaurant(
       name: String!
       address: String!
       rating: Float
