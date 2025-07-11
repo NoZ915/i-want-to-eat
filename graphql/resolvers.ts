@@ -134,14 +134,12 @@ export const resolvers = {
     address,
     rating,
     price_level,
-    isRecommended,
     userReview,
   }: {
     name: string;
     address: string;
     rating?: number;
     price_level?: number;
-    isRecommended?: boolean;
     userReview?: {
       pros?: string;
       cons?: string;
@@ -161,7 +159,6 @@ export const resolvers = {
         types: [],
         price_level: price_level || 0,
         isUserAdded: true,
-        isRecommended: isRecommended || false,
         createdAt: new Date(),
         userReview: userReview ? { ...userReview, updatedAt: new Date() } : undefined,
       });
