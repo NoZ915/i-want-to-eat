@@ -46,30 +46,26 @@ export const schema = buildSchema(`
     totalPages: Int
   }
 
-type Query {
-  restaurants(
-    page: Int = 1
-    limit: Int = 10
-    sortBy: String
-    order: String
-    search: String
-  ): RestaurantPaginatedResult
-}
+  type Query {
+    restaurants(
+      page: Int = 1
+      limit: Int = 10
+      sortBy: String
+      order: String
+      search: String
+    ): RestaurantPaginatedResult
+  }
 
   type Mutation {
     deleteRestaurant(id: ID!): Boolean
-    updateUserAddedRestaurant(
-      id: ID!
-      name: String
-      address: String
-      rating: Float
-      price_level: Int
-      userReview: UserReviewInput
-    ): Restaurant
-
-    updateGoogleRestaurantUserReview(
-      id: ID!
-      userReview: UserReviewInput
+    
+    updateRestaurant(
+      $id: ID!
+      $name: String
+      $address: String
+      $rating: Float
+      $price_level: Int
+      $userReview: UserReviewInput
     ): Restaurant
 
     createUserAddedRestaurant(
