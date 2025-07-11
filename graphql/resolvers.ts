@@ -61,73 +61,73 @@ export const resolvers = {
     }
   },
 
-updateRestaurant: async ({
-  id,
-  name,
-  address,
-  rating,
-  price_level,
-  userReview
-}: {
-  id: string;
-  name?: string;
-  address?: string;
-  rating?: number;
-  price_level?: number;
-  userReview?: {
-    pros?: string;
-    cons?: string;
+  updateRestaurant: async ({
+    id,
+    name,
+    address,
+    rating,
+    price_level,
+    userReview
+  }: {
+    id: string;
+    name?: string;
+    address?: string;
     rating?: number;
-    isRecommended?: boolean;
-    images?: string[];
-  };
-}) => {
-  try {
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      throw new Error("無效的餐廳 ID");
+    price_level?: number;
+    userReview?: {
+      pros?: string;
+      cons?: string;
+      rating?: number;
+      isRecommended?: boolean;
+      images?: string[];
+    };
+  }) => {
+    try {
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        throw new Error("無效的餐廳 ID");
+      }
+  
+      const restaurant = await Restaurant.findById(id);
+      if (!restaurant) {
+        throw new Error("找不到餐廳");
+      }
+  
+      // 更新基本欄位（僅限 isUserAdded 餐廳）
+      if (restaurant.isUserAdded) {
+        if (name !== undefined) restaurant.name = name;
+        if (address !== undefined) restaurant.address = address;
+        if (rating !== undefined) restaurant.rating = rating;
+        if (price_level !== undefined) restaurant.price_level = price_level;
+      }
+  
+      // 更新使用者評論（userReview）
+      if (!restaurant.userReview) {
+        restaurant.userReview = {
+          pros: "",
+          cons: "",
+          rating: 0,
+          isRecommended: false,
+          images: [],
+          updatedAt: new Date()
+        };
+      }
+  
+      if (userReview) {
+        if (userReview.pros !== undefined) restaurant.userReview.pros = userReview.pros;
+        if (userReview.cons !== undefined) restaurant.userReview.cons = userReview.cons;
+        if (userReview.rating !== undefined) restaurant.userReview.rating = userReview.rating;
+        if (userReview.isRecommended !== undefined) restaurant.userReview.isRecommended = userReview.isRecommended;
+        if (userReview.images !== undefined) restaurant.userReview.images = userReview.images;
+        restaurant.userReview.updatedAt = new Date();
+      }
+  
+      await restaurant.save();
+      return restaurant;
+    } catch (error) {
+      console.error("更新餐廳失敗", error);
+      throw error;
     }
-
-    const restaurant = await Restaurant.findById(id);
-    if (!restaurant) {
-      throw new Error("找不到餐廳");
-    }
-
-    // 更新基本欄位（僅限 isUserAdded 餐廳）
-    if (restaurant.isUserAdded) {
-      if (name !== undefined) restaurant.name = name;
-      if (address !== undefined) restaurant.address = address;
-      if (rating !== undefined) restaurant.rating = rating;
-      if (price_level !== undefined) restaurant.price_level = price_level;
-    }
-
-    // 更新使用者評論（userReview）
-    if (!restaurant.userReview) {
-      restaurant.userReview = {
-        pros: "",
-        cons: "",
-        rating: 0,
-        isRecommended: false,
-        images: [],
-        updatedAt: new Date()
-      };
-    }
-
-    if (userReview) {
-      if (userReview.pros !== undefined) restaurant.userReview.pros = userReview.pros;
-      if (userReview.cons !== undefined) restaurant.userReview.cons = userReview.cons;
-      if (userReview.rating !== undefined) restaurant.userReview.rating = userReview.rating;
-      if (userReview.isRecommended !== undefined) restaurant.userReview.isRecommended = userReview.isRecommended;
-      if (userReview.images !== undefined) restaurant.userReview.images = userReview.images;
-      restaurant.userReview.updatedAt = new Date();
-    }
-
-    await restaurant.save();
-    return restaurant;
-  } catch (error) {
-    console.error("更新餐廳失敗", error);
-    throw error;
-  }
-},
+  },
 
   createUserAddedRestaurant: async ({
     name,
