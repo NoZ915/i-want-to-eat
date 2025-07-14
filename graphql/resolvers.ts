@@ -25,18 +25,20 @@ export const resolvers = {
     }
 
     // 確保 sort 欄位合法，避免使用者傳奇怪的欄位造成錯誤
-    const validSortFields = [
-      "rating",
-      "price_level",
-      "createdAt",
-      "user_ratings_total",
-      "name",
-      "distance"
-    ];
-    const sortField = validSortFields.includes(sortBy) ? sortBy : "createdAt";
+    const sortFieldMap: Record<string, string> = {
+      rating: "rating",
+      price_level: "price_level",
+      createdAt: "createdAt",
+      user_ratings_total: "user_ratings_total",
+      name: "name",
+      distance: "distance",
+      isRecommended: "userReview.isRecommended", 
+    };
+    
+    const resolvedSortField = sortFieldMap[sortBy] || "createdAt";
     const sortOrder = order === "asc" ? 1 : -1;
 
-    const sort: { [key: string]: SortOrder } = { [sortField]: sortOrder };
+    const sort: { [key: string]: SortOrder } = { [resolvedSortField]: sortOrder };
 
     const [data, total] = await Promise.all([
       Restaurant.find(filter).sort(sort).skip(skip).limit(limit),
