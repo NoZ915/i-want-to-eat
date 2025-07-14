@@ -51,6 +51,16 @@ export const resolvers = {
     };
   },
 
+  availableTypes: async () => {
+    try {
+      const types = await Restaurant.distinct("types"); 
+      return types.sort(); // 排序後回傳
+    } catch (error) {
+      console.error("取得 types 失敗", error);
+      return [];
+    }
+  },
+
   deleteRestaurant: async ({ id }: { id: string }) => {
     try {
       const result = await Restaurant.findByIdAndDelete(id);
