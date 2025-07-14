@@ -77,6 +77,7 @@ export const resolvers = {
     address,
     rating,
     price_level,
+    types,
     userReview
   }: {
     id: string;
@@ -84,6 +85,7 @@ export const resolvers = {
     address?: string;
     rating?: number;
     price_level?: number;
+    types?: string[];
     userReview?: {
       pros?: string;
       cons?: string;
@@ -108,6 +110,7 @@ export const resolvers = {
         if (address !== undefined) restaurant.address = address;
         if (rating !== undefined) restaurant.rating = rating;
         if (price_level !== undefined) restaurant.price_level = price_level;
+        if (types !== undefined) restaurant.types = types;
       }
   
       // 更新使用者評論（userReview）
@@ -144,12 +147,14 @@ export const resolvers = {
     address,
     rating,
     price_level,
+    types,
     userReview,
   }: {
     name: string;
     address: string;
     rating?: number;
     price_level?: number;
+    types?: string[];
     userReview?: {
       pros?: string;
       cons?: string;
@@ -166,7 +171,7 @@ export const resolvers = {
         distance: 0,
         rating: rating || 0,
         user_ratings_total: 0,
-        types: [],
+        types: types || [],
         price_level: price_level || 0,
         isUserAdded: true,
         createdAt: new Date(),
