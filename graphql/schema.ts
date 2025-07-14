@@ -54,6 +54,7 @@ export const schema = buildSchema(`
       order: String
       search: String
     ): RestaurantPaginatedResult
+    
     availableTypes: [String]
   }
 
@@ -66,6 +67,7 @@ export const schema = buildSchema(`
       address: String
       rating: Float
       price_level: Int
+      types: [String!]
       userReview: UserReviewInput
     ): Restaurant
 
@@ -74,6 +76,7 @@ export const schema = buildSchema(`
       address: String!
       rating: Float
       price_level: Int
+      types: [String!]
       userReview: UserReviewInput
     ): Restaurant
   }
