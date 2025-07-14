@@ -54,6 +54,7 @@ export const schema = buildSchema(`
       order: String
       search: String
     ): RestaurantPaginatedResult
+    availableTypes: [String]
   }
 
   type Mutation {
