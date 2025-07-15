@@ -40,6 +40,11 @@ export const resolvers = {
 
     const sort: { [key: string]: SortOrder } = { [resolvedSortField]: sortOrder };
 
+    // 若要排序的主欄位不是"createdAt", "_id" 則加上次欄位"createdAt"以降冪排序
+    if (!["createdAt", "_id"].includes(resolvedSortField)) {
+      sort["createdAt"] = -1;
+    }
+
     const [data, total] = await Promise.all([
       Restaurant.find(filter).sort(sort).skip(skip).limit(limit),
       Restaurant.countDocuments(filter),
