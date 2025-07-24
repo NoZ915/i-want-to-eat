@@ -25,7 +25,7 @@ export const schema = buildSchema(`
 
   type Restaurant {
     _id: ID!
-    place_id: String
+    placeId: String
     name: String
     address: String
     location: Location
