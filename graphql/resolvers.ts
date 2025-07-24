@@ -27,7 +27,7 @@ export const resolvers = {
     // 確保 sort 欄位合法，避免使用者傳奇怪的欄位造成錯誤
     const sortFieldMap: Record<string, string> = {
       rating: "rating",
-      price_level: "price_level",
+      priceLevel: "priceLevel",
       createdAt: "createdAt",
       userRatingsTotal: "userRatingsTotal",
       name: "name",
@@ -83,7 +83,7 @@ export const resolvers = {
     name,
     address,
     rating,
-    price_level,
+    priceLevel,
     types,
     userReview
   }: {
@@ -91,7 +91,7 @@ export const resolvers = {
     name?: string;
     address?: string;
     rating?: number;
-    price_level?: number;
+    priceLevel?: number;
     types?: string[];
     userReview?: {
       pros?: string;
@@ -116,7 +116,7 @@ export const resolvers = {
         if (name !== undefined) restaurant.name = name;
         if (address !== undefined) restaurant.address = address;
         if (rating !== undefined) restaurant.rating = rating;
-        if (price_level !== undefined) restaurant.price_level = price_level;
+        if (priceLevel !== undefined) restaurant.priceLevel = priceLevel;
         if (types !== undefined) restaurant.types = types;
       }
   
@@ -153,14 +153,14 @@ export const resolvers = {
     name,
     address,
     rating,
-    price_level,
+    priceLevel,
     types,
     userReview,
   }: {
     name: string;
     address: string;
     rating?: number;
-    price_level?: number;
+    priceLevel?: number;
     types?: string[];
     userReview?: {
       pros?: string;
@@ -179,7 +179,7 @@ export const resolvers = {
         rating: rating || 0,
         userRatingsTotal: 0,
         types: types || [],
-        price_level: price_level || 0,
+        priceLevel: priceLevel || 0,
         isUserAdded: true,
         createdAt: new Date(),
         userReview: userReview ? { ...userReview, updatedAt: new Date() } : undefined,
