@@ -62,17 +62,17 @@ const fetchAndInsertRestaurants = async () => {
           location,
           distance,
           rating: place.rating,
-          user_ratings_total: place.user_ratings_total,
+          userRatingsTotal: place.user_ratings_total,
           types: place.types,
           price_level: place.price_level,
         };
 
         await Restaurant.findOneAndUpdate(
-          { place_id: place.place_id },
+          { placeId: place.place_id },
           {
             $set: googleData,
             $setOnInsert: {
-              place_id: place.place_id,
+              placeId: place.place_id,
               isUserAdded: false,
               createdAt: new Date(),
               userReview: {
