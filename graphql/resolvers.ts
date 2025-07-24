@@ -172,7 +172,7 @@ export const resolvers = {
   }) => {
     try {
       const newRestaurant = new Restaurant({
-        place_id: new mongoose.Types.ObjectId().toHexString(),
+        placeId: new mongoose.Types.ObjectId().toHexString(),
         name,
         address,
         distance: 0,
