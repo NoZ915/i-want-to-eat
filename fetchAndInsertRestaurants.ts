@@ -64,7 +64,7 @@ const fetchAndInsertRestaurants = async () => {
           rating: place.rating,
           userRatingsTotal: place.user_ratings_total,
           types: place.types,
-          price_level: place.price_level,
+          priceLevel: place.price_level,
         };
 
         await Restaurant.findOneAndUpdate(
