@@ -31,7 +31,7 @@ export const schema = buildSchema(`
     location: Location
     distance: Int
     rating: Float
-    user_ratings_total: Int
+    userRatingsTotal: Int
     types: [String]
     price_level: Int
     isUserAdded: Boolean
