@@ -19,7 +19,7 @@ const restaurantSchema = new mongoose.Schema({
   },
   distance: Number,
   rating: Number,
-  user_ratings_total: Number,
+  userRatingsTotal: Number,
   types: [String],
   price_level: Number,
 
