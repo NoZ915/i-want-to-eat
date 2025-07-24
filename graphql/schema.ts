@@ -33,7 +33,7 @@ export const schema = buildSchema(`
     rating: Float
     userRatingsTotal: Int
     types: [String]
-    price_level: Int
+    priceLevel: Int
     isUserAdded: Boolean
     createdAt: String
     userReview: UserReview
@@ -66,7 +66,7 @@ export const schema = buildSchema(`
       name: String
       address: String
       rating: Float
-      price_level: Int
+      priceLevel: Int
       types: [String!]
       userReview: UserReviewInput
     ): Restaurant
