@@ -10,7 +10,7 @@ const userReviewSchema = new mongoose.Schema({
 });
 
 const restaurantSchema = new mongoose.Schema({
-  place_id: { type: String, unique: true },
+  placeId: type: String,
   name: String,
   address: String,
   location: {
